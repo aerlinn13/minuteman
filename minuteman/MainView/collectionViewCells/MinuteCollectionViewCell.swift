@@ -8,9 +8,11 @@
 import UIKit
 
 class MinuteCollectionViewCell: UICollectionViewCell {
-
+    @IBOutlet weak var dotView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.dotView.layer.cornerRadius = self.dotView.bounds.height / 2
         // Initialization code
     }
 

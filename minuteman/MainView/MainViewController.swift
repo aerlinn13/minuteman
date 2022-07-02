@@ -24,25 +24,39 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
         if (collectionView === self.minutesCollectionView) {
+            print("minutes")
             return 1440
         }
         
-        return 5
+        if (collectionView === self.activitiesCollectionView) {
+            print("activities")
+            return 5
+        }
+        
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        if (collectionView === self.minutesCollectionView) {
+            let cell = self.minutesCollectionView.dequeueReusableCell(withReuseIdentifier: "minuteCollectionViewCell", for: indexPath) as! MinuteCollectionViewCell
+            return cell
+        }
+        
+            return self.activitiesCollectionView.dequeueReusableCell(withReuseIdentifier: "activityCollectionViewCell", for: indexPath) as! ActivityCollectionViewCell
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        minutesCollectionView.delegate = self
-        minutesCollectionView.dataSource = self
+        self.minutesCollectionView.delegate = self
+        self.minutesCollectionView.dataSource = self
+        self.minutesCollectionView.register(UINib(nibName: "MinuteCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "minuteCollectionViewCell")
         
-        activitiesCollectionView.delegate = self
-        activitiesCollectionView.dataSource = self
-        // Do any additional setup after loading the view.
+        self.activitiesCollectionView.delegate = self
+        self.activitiesCollectionView.dataSource = self
+        self.activitiesCollectionView.register(UINib(nibName: "ActivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "activityCollectionViewCell")
     }
 
 
