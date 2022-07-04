@@ -18,6 +18,13 @@
 		984ACE5F286E524500F6C763 /* MinuteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984ACE5D286E524500F6C763 /* MinuteCollectionViewCell.xib */; };
 		984ACE64286E535000F6C763 /* ActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE62286E535000F6C763 /* ActivityCollectionViewCell.swift */; };
 		984ACE65286E535000F6C763 /* ActivityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984ACE63286E535000F6C763 /* ActivityCollectionViewCell.xib */; };
+		984ACE6A2873771F00F6C763 /* Minute+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE662873771F00F6C763 /* Minute+CoreDataClass.swift */; };
+		984ACE6B2873771F00F6C763 /* Minute+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE672873771F00F6C763 /* Minute+CoreDataProperties.swift */; };
+		984ACE6C2873771F00F6C763 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE682873771F00F6C763 /* Activity+CoreDataClass.swift */; };
+		984ACE6D2873771F00F6C763 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE692873771F00F6C763 /* Activity+CoreDataProperties.swift */; };
+		984ACE7128737CA900F6C763 /* AddActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE6F28737CA900F6C763 /* AddActivityCollectionViewCell.swift */; };
+		984ACE7228737CA900F6C763 /* AddActivityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984ACE7028737CA900F6C763 /* AddActivityCollectionViewCell.xib */; };
+		984ACE7628737F6900F6C763 /* AddActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE7528737F6900F6C763 /* AddActivityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +41,13 @@
 		984ACE5D286E524500F6C763 /* MinuteCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MinuteCollectionViewCell.xib; sourceTree = "<group>"; };
 		984ACE62286E535000F6C763 /* ActivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCollectionViewCell.swift; sourceTree = "<group>"; };
 		984ACE63286E535000F6C763 /* ActivityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCollectionViewCell.xib; sourceTree = "<group>"; };
+		984ACE662873771F00F6C763 /* Minute+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Minute+CoreDataClass.swift"; sourceTree = "<group>"; };
+		984ACE672873771F00F6C763 /* Minute+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Minute+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		984ACE682873771F00F6C763 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		984ACE692873771F00F6C763 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		984ACE6F28737CA900F6C763 /* AddActivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivityCollectionViewCell.swift; sourceTree = "<group>"; };
+		984ACE7028737CA900F6C763 /* AddActivityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddActivityCollectionViewCell.xib; sourceTree = "<group>"; };
+		984ACE7528737F6900F6C763 /* AddActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +80,11 @@
 		984ACE44286E42E300F6C763 /* minuteman */ = {
 			isa = PBXGroup;
 			children = (
+				984ACE7328737EC600F6C763 /* Screens */,
+				984ACE6E2873773C00F6C763 /* Models */,
 				984ACE45286E42E300F6C763 /* AppDelegate.swift */,
 				984ACE47286E42E300F6C763 /* SceneDelegate.swift */,
-				984ACE60286E526000F6C763 /* MainView */,
+				984ACE4B286E42E300F6C763 /* Main.storyboard */,
 				984ACE51286E42E600F6C763 /* Assets.xcassets */,
 				984ACE53286E42E600F6C763 /* LaunchScreen.storyboard */,
 				984ACE56286E42E600F6C763 /* Info.plist */,
@@ -77,14 +93,13 @@
 			path = minuteman;
 			sourceTree = "<group>";
 		};
-		984ACE60286E526000F6C763 /* MainView */ = {
+		984ACE60286E526000F6C763 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
 				984ACE61286E528300F6C763 /* collectionViewCells */,
-				984ACE4B286E42E300F6C763 /* Main.storyboard */,
 				984ACE49286E42E300F6C763 /* MainViewController.swift */,
 			);
-			path = MainView;
+			path = MainViewController;
 			sourceTree = "<group>";
 		};
 		984ACE61286E528300F6C763 /* collectionViewCells */ = {
@@ -94,8 +109,38 @@
 				984ACE5D286E524500F6C763 /* MinuteCollectionViewCell.xib */,
 				984ACE62286E535000F6C763 /* ActivityCollectionViewCell.swift */,
 				984ACE63286E535000F6C763 /* ActivityCollectionViewCell.xib */,
+				984ACE6F28737CA900F6C763 /* AddActivityCollectionViewCell.swift */,
+				984ACE7028737CA900F6C763 /* AddActivityCollectionViewCell.xib */,
 			);
 			path = collectionViewCells;
+			sourceTree = "<group>";
+		};
+		984ACE6E2873773C00F6C763 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				984ACE662873771F00F6C763 /* Minute+CoreDataClass.swift */,
+				984ACE672873771F00F6C763 /* Minute+CoreDataProperties.swift */,
+				984ACE682873771F00F6C763 /* Activity+CoreDataClass.swift */,
+				984ACE692873771F00F6C763 /* Activity+CoreDataProperties.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		984ACE7328737EC600F6C763 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				984ACE7428737EE100F6C763 /* AddActivityViewController */,
+				984ACE60286E526000F6C763 /* MainViewController */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		984ACE7428737EE100F6C763 /* AddActivityViewController */ = {
+			isa = PBXGroup;
+			children = (
+				984ACE7528737F6900F6C763 /* AddActivityViewController.swift */,
+			);
+			path = AddActivityViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +204,7 @@
 				984ACE55286E42E600F6C763 /* LaunchScreen.storyboard in Resources */,
 				984ACE52286E42E600F6C763 /* Assets.xcassets in Resources */,
 				984ACE5F286E524500F6C763 /* MinuteCollectionViewCell.xib in Resources */,
+				984ACE7228737CA900F6C763 /* AddActivityCollectionViewCell.xib in Resources */,
 				984ACE4D286E42E300F6C763 /* Main.storyboard in Resources */,
 				984ACE65286E535000F6C763 /* ActivityCollectionViewCell.xib in Resources */,
 			);
@@ -173,10 +219,16 @@
 			files = (
 				984ACE50286E42E300F6C763 /* minuteman.xcdatamodeld in Sources */,
 				984ACE4A286E42E300F6C763 /* MainViewController.swift in Sources */,
+				984ACE6D2873771F00F6C763 /* Activity+CoreDataProperties.swift in Sources */,
+				984ACE7628737F6900F6C763 /* AddActivityViewController.swift in Sources */,
 				984ACE64286E535000F6C763 /* ActivityCollectionViewCell.swift in Sources */,
 				984ACE5E286E524500F6C763 /* MinuteCollectionViewCell.swift in Sources */,
+				984ACE6C2873771F00F6C763 /* Activity+CoreDataClass.swift in Sources */,
 				984ACE46286E42E300F6C763 /* AppDelegate.swift in Sources */,
+				984ACE6A2873771F00F6C763 /* Minute+CoreDataClass.swift in Sources */,
 				984ACE48286E42E300F6C763 /* SceneDelegate.swift in Sources */,
+				984ACE7128737CA900F6C763 /* AddActivityCollectionViewCell.swift in Sources */,
+				984ACE6B2873771F00F6C763 /* Minute+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
