@@ -8,7 +8,8 @@
 import UIKit
 
 class ActivityCollectionViewCell: UICollectionViewCell {
-
+    @IBOutlet weak var activityEmojiImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

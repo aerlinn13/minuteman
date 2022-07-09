@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 extension String {
 
@@ -17,7 +18,6 @@ extension String {
         let stringBounds = (self as NSString).size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 75)])
         let originX = (size.width - stringBounds.width)/2
         let originY = (size.height - stringBounds.height)/2
-        print(stringBounds)
         let rect = CGRect(origin: CGPoint(x: originX, y: originY), size: size)
         UIRectFill(rect)
 
@@ -28,4 +28,13 @@ extension String {
         return image
     }
 
+}
+
+extension NSManagedObject {
+    
+    convenience init(context: NSManagedObjectContext) {
+        let name = String(describing: type(of: self))
+        let entity = NSEntityDescription.entity(forEntityName: name, in: context)!
+        self.init(entity: entity, insertInto: context)
+    }
 }

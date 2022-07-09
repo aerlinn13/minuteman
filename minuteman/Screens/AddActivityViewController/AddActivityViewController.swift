@@ -6,19 +6,28 @@
 //
 
 import UIKit
+import CoreData
 
 class AddActivityViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    
+    var container: NSPersistentContainer!
+
     @IBAction func dismissScreen(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
     
     @IBAction func completeButton(_ sender: Any) {
+        let activity = Activity(context: container.viewContext)
+        activity.emoji = self.selectedEmojiString
+        activity.id = UUID()
+        self.saveContext()
+        NotificationCenter.default.post(name: Notification.Name("activitiesUpdate"), object: nil)
+        self.dismiss(animated: true)
     }
     
     @IBOutlet weak var emojiCollectionView: UICollectionView!
     
     @IBOutlet weak var selectedEmoji: UIImageView!
+    var selectedEmojiString = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +35,25 @@ class AddActivityViewController: UIViewController, UICollectionViewDelegate, UIC
         self.emojiCollectionView.dataSource = self
         self.emojiCollectionView.register(UINib(nibName: "EmojiCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "emojiCollectionViewCell")
         
+        container = NSPersistentContainer(name: "minuteman")
+
+        container.loadPersistentStores { storeDescription, error in
+            if let error = error {
+                print("Unresolved error \(error)")
+            }
+        }
+        
         self.parseEmojis()
+    }
+    
+    func saveContext() {
+        if container.viewContext.hasChanges {
+            do {
+                try container.viewContext.save()
+            } catch {
+                print("An error occurred while saving: \(error)")
+            }
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -42,6 +69,12 @@ class AddActivityViewController: UIViewController, UICollectionViewDelegate, UIC
         cell.imageView.image = emojiList[indexPath.section][indexPath.item].image()
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedEmojiString = emojiList[indexPath.section][indexPath.item]
+        self.selectedEmoji.image = emojiList[indexPath.section][indexPath.item].image()
+    }
+
     
     var emojiList: [[String]] = []
     let sectionTitle: [String] = ["Emoticons", "Dingbats", "Transport and map symbols", "Enclosed Characters"]
