@@ -27,6 +27,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var timer = Timer()
     
+    var currentTimestamp = Date().timeIntervalSince1970
+    
     var dayStart: Date {
         let date = Date()
         let cal = Calendar(identifier: .gregorian)
@@ -38,6 +40,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let seconds = (Calendar.current.component(.second, from: today))
 
         if (seconds == 0) {
+            self.currentTimestamp = Date().timeIntervalSince1970
             self.minutesCollectionView.reloadData()
         }
     }
@@ -109,10 +112,9 @@ extension MainViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if (collectionView === self.minutesCollectionView) {
             let cell = self.minutesCollectionView.dequeueReusableCell(withReuseIdentifier: "minuteCollectionViewCell", for: indexPath) as! MinuteCollectionViewCell
-            let timestamp = Date().timeIntervalSince1970
 
-            if (Int(timestamp) > self.selectedDayTimestamps[indexPath.row] && Int(timestamp) < self.selectedDayTimestamps[indexPath.row + 1]) {
-
+            if (Int(self.currentTimestamp) >= self.selectedDayTimestamps[indexPath.row] && Int(self.currentTimestamp) < self.selectedDayTimestamps[indexPath.row + 1]) {
+                
                 cell.dotView.backgroundColor = .red
             } else {
                 cell.dotView.backgroundColor = .gray
