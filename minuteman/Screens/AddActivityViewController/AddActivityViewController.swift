@@ -19,6 +19,7 @@ class AddActivityViewController: UIViewController, UICollectionViewDelegate, UIC
         let activity = Activity(context: container.viewContext)
         activity.emoji = self.selectedEmojiString
         activity.id = UUID()
+        activity.colour = UIColor.random().encode() ?? Data()
         self.saveContext()
         NotificationCenter.default.post(name: Notification.Name("activitiesUpdate"), object: nil)
         self.dismiss(animated: true)

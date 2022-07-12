@@ -16,7 +16,7 @@ extension Activity {
         return NSFetchRequest<Activity>(entityName: "Activity")
     }
 
-    @NSManaged public var colour: String
+    @NSManaged public var colour: Data
     @NSManaged public var emoji: String
     @NSManaged public var id: UUID
     @NSManaged public var name: String

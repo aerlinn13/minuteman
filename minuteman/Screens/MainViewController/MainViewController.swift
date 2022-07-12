@@ -112,12 +112,13 @@ extension MainViewController {
             let timestamp = Date().timeIntervalSince1970
 
             if (Int(timestamp) > self.selectedDayTimestamps[indexPath.row] && Int(timestamp) < self.selectedDayTimestamps[indexPath.row + 1]) {
+
                 cell.dotView.backgroundColor = .red
-                cell.setNeedsLayout()
             } else {
                 cell.dotView.backgroundColor = .gray
             }
 
+            cell.setNeedsLayout()
             return cell
         }
 
@@ -131,9 +132,11 @@ extension MainViewController {
         }
         
         let activityCell = self.activitiesCollectionView.dequeueReusableCell(withReuseIdentifier: "activityCollectionViewCell", for: indexPath) as! ActivityCollectionViewCell
-        activityCell.activityEmojiImage.image = activities[indexPath.row].emoji.image()
+        let activity = activities[indexPath.row]
+        activityCell.activityEmojiImage.image = activity.emoji.image()
+        activityCell.activityEmojiImage.backgroundColor = UIColor.color(data: activity.colour)
 
-            return activityCell
+        return activityCell
     }
 }
 

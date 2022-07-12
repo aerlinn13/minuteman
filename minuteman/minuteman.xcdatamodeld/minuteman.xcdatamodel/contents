@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Activity" representedClassName="Activity" syncable="YES">
-        <attribute name="colour" attributeType="String" defaultValueString=""/>
+        <attribute name="colour" optional="YES" attributeType="Binary" defaultValueString=""/>
         <attribute name="emoji" attributeType="String" defaultValueString=""/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
-        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Minute" inverseName="newRelationship" inverseEntity="Minute"/>
     </entity>
     <entity name="Minute" representedClassName="Minute" syncable="YES">
         <attribute name="activityDescription" attributeType="String" defaultValueString=""/>
         <attribute name="activityId" attributeType="String" defaultValueString=""/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="newRelationship" inverseEntity="Activity"/>
     </entity>
     <elements>
-        <element name="Minute" positionX="-178.7578125" positionY="-327.7265625" width="128" height="103"/>
-        <element name="Activity" positionX="-36" positionY="-90" width="128" height="118"/>
+        <element name="Minute" positionX="-178.7578125" positionY="-327.7265625" width="128" height="88"/>
+        <element name="Activity" positionX="-36" positionY="-90" width="128" height="103"/>
     </elements>
 </model>

@@ -38,3 +38,29 @@ extension NSManagedObject {
         self.init(entity: entity, insertInto: context)
     }
 }
+
+extension CGFloat {
+    static func random() -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
+}
+
+extension UIColor {
+    static func random() -> UIColor {
+        return UIColor(
+           red:   .random(),
+           green: .random(),
+           blue:  .random(),
+           alpha: 1.0
+        )
+    }
+    
+    class func color(data:Data) -> UIColor? {
+              return try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UIColor
+         }
+
+         func encode() -> Data? {
+              return try? NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: false)
+         }
+}
+
