@@ -4,29 +4,31 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="addActivityCollectionViewCell" id="gTV-IL-0wX" customClass="AddActivityCollectionViewCell" customModule="minuteman" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+            <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H0o-M2-OB4">
-                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H0o-M2-OB4">
+                        <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <state key="normal" title="Button"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="90" id="J8B-Mw-3xf"/>
+                            <constraint firstAttribute="height" constant="30" id="TMr-0o-USN"/>
+                        </constraints>
                         <buttonConfiguration key="configuration" style="plain">
                             <attributedString key="attributedTitle">
-                                <fragment content="+">
+                                <fragment content="  Add">
                                     <attributes>
                                         <font key="NSFont" size="10" name="Helvetica"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>
                             </attributedString>
@@ -38,14 +40,13 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" systemColor="labelColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="H0o-M2-OB4" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="lk9-K0-1rs"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="H0o-M2-OB4" secondAttribute="bottom" id="zOy-oO-CIJ"/>
+            </constraints>
             <size key="customSize" width="51" height="47"/>
             <point key="canvasLocation" x="139.13043478260872" y="78.348214285714278"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

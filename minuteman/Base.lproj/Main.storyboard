@@ -53,13 +53,13 @@
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ID0-Ty-fkk">
-                                <rect key="frame" x="20" y="608" width="364" height="120"/>
+                                <rect key="frame" x="20" y="608" width="374" height="120"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="Pz7-rj-to6"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lQd-8t-WlH">
-                                    <size key="itemSize" width="30" height="30"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="lQd-8t-WlH">
+                                    <size key="itemSize" width="90" height="30"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -74,7 +74,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ID0-Ty-fkk" secondAttribute="trailing" constant="30" id="12F-t2-BYI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ID0-Ty-fkk" secondAttribute="trailing" constant="20" id="12F-t2-BYI"/>
                             <constraint firstItem="Oe5-fL-gCe" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="5Ir-Rj-YEQ"/>
                             <constraint firstItem="ID0-Ty-fkk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="H5p-yF-uJI"/>
                             <constraint firstItem="78y-GC-KKN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Ohg-Bm-cOs"/>
@@ -141,7 +141,7 @@
                                     <outlet property="delegate" destination="WAb-ef-gld" id="aqv-rr-irB"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6b-kN-yXq">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6b-kN-yXq">
                                 <rect key="frame" x="20" y="587" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="nEc-HA-cTb"/>
@@ -182,6 +182,7 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="completeButtonView" destination="Z6b-kN-yXq" id="CT7-I2-Tl5"/>
                         <outlet property="emojiCollectionView" destination="0LY-FA-t8q" id="D2v-dm-EFt"/>
                         <outlet property="selectedEmoji" destination="Hdd-Ck-88M" id="Eyu-YV-j4Z"/>
                     </connections>

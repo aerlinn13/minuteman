@@ -136,7 +136,7 @@ extension MainViewController {
         let activityCell = self.activitiesCollectionView.dequeueReusableCell(withReuseIdentifier: "activityCollectionViewCell", for: indexPath) as! ActivityCollectionViewCell
         let activity = activities[indexPath.row]
         activityCell.activityEmojiImage.image = activity.emoji.image()
-        activityCell.activityEmojiImage.backgroundColor = UIColor.color(data: activity.colour)
+        activityCell.backgroundColor = UIColor.color(data: activity.colour)
 
         return activityCell
     }

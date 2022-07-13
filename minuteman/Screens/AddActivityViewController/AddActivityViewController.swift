@@ -14,21 +14,24 @@ class AddActivityViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBAction func dismissScreen(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
+    @IBOutlet weak var completeButtonView: UIButton!
     
     @IBAction func completeButton(_ sender: Any) {
-        let activity = Activity(context: container.viewContext)
-        activity.emoji = self.selectedEmojiString
-        activity.id = UUID()
-        activity.colour = UIColor.random().encode() ?? Data()
-        self.saveContext()
-        NotificationCenter.default.post(name: Notification.Name("activitiesUpdate"), object: nil)
-        self.dismiss(animated: true)
+        if (self.selectedEmojiString != nil) {
+            let activity = Activity(context: container.viewContext)
+            activity.emoji = self.selectedEmojiString!
+            activity.id = UUID()
+            activity.colour = UIColor.random().encode() ?? Data()
+            self.saveContext()
+            NotificationCenter.default.post(name: Notification.Name("activitiesUpdate"), object: nil)
+            self.dismiss(animated: true)
+        }
     }
     
     @IBOutlet weak var emojiCollectionView: UICollectionView!
     
     @IBOutlet weak var selectedEmoji: UIImageView!
-    var selectedEmojiString = ""
+    var selectedEmojiString: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +77,7 @@ class AddActivityViewController: UIViewController, UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedEmojiString = emojiList[indexPath.section][indexPath.item]
         self.selectedEmoji.image = emojiList[indexPath.section][indexPath.item].image()
+        self.completeButtonView.isEnabled = true
     }
 
     

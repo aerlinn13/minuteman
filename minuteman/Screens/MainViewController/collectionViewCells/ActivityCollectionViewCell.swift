@@ -9,6 +9,8 @@ import UIKit
 
 class ActivityCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var activityEmojiImage: UIImageView!
+
+    @IBOutlet weak var activityTimerLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
