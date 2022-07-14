@@ -112,6 +112,12 @@ extension MainViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if (collectionView === self.minutesCollectionView) {
             let cell = self.minutesCollectionView.dequeueReusableCell(withReuseIdentifier: "minuteCollectionViewCell", for: indexPath) as! MinuteCollectionViewCell
+            
+            if (indexPath.row == 1439 && Int(self.currentTimestamp) >= self.selectedDayTimestamps[indexPath.row]) {
+                cell.dotView.backgroundColor = .red
+            } else {
+                cell.dotView.backgroundColor = .gray
+            }
 
             if (Int(self.currentTimestamp) >= self.selectedDayTimestamps[indexPath.row] && Int(self.currentTimestamp) < self.selectedDayTimestamps[indexPath.row + 1]) {
                 
