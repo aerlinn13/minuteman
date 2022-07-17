@@ -5,22 +5,17 @@
         <attribute name="emoji" attributeType="String" defaultValueString=""/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TimeEvent" inverseName="relationship" inverseEntity="TimeEvent"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ActivityEvent" inverseName="relationship" inverseEntity="ActivityEvent"/>
     </entity>
-    <entity name="Minute" representedClassName="Minute" syncable="YES">
-        <attribute name="activityDescription" attributeType="String" defaultValueString=""/>
-        <attribute name="activityId" attributeType="String" defaultValueString=""/>
-        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-    </entity>
-    <entity name="TimeEvent" representedClassName="TimeEvent" syncable="YES">
+    <entity name="ActivityEvent" representedClassName="ActivityEvent" syncable="YES">
         <attribute name="activityId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="relationship" inverseEntity="Activity"/>
     </entity>
     <elements>
-        <element name="Minute" positionX="-178.7578125" positionY="-327.7265625" width="128" height="88"/>
         <element name="Activity" positionX="-36" positionY="-90" width="128" height="118"/>
-        <element name="TimeEvent" positionX="-63" positionY="-126" width="128" height="89"/>
+        <element name="ActivityEvent" positionX="-63" positionY="-126" width="128" height="104"/>
     </elements>
 </model>

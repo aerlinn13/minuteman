@@ -28,8 +28,8 @@
 		984ACE782874DA1500F6C763 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE772874DA1500F6C763 /* Extensions.swift */; };
 		984ACE7C2874E2CF00F6C763 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE7A2874E2CF00F6C763 /* EmojiCollectionViewCell.swift */; };
 		984ACE7D2874E2CF00F6C763 /* EmojiCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984ACE7B2874E2CF00F6C763 /* EmojiCollectionViewCell.xib */; };
-		984ACE802880D8F800F6C763 /* TimeEvent+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE7E2880D8F800F6C763 /* TimeEvent+CoreDataClass.swift */; };
-		984ACE812880D8F800F6C763 /* TimeEvent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE7F2880D8F800F6C763 /* TimeEvent+CoreDataProperties.swift */; };
+		984ACE802880D8F800F6C763 /* ActivityEvent+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE7E2880D8F800F6C763 /* ActivityEvent+CoreDataClass.swift */; };
+		984ACE812880D8F800F6C763 /* ActivityEvent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984ACE7F2880D8F800F6C763 /* ActivityEvent+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,8 +56,8 @@
 		984ACE772874DA1500F6C763 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		984ACE7A2874E2CF00F6C763 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		984ACE7B2874E2CF00F6C763 /* EmojiCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiCollectionViewCell.xib; sourceTree = "<group>"; };
-		984ACE7E2880D8F800F6C763 /* TimeEvent+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeEvent+CoreDataClass.swift"; sourceTree = "<group>"; };
-		984ACE7F2880D8F800F6C763 /* TimeEvent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeEvent+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		984ACE7E2880D8F800F6C763 /* ActivityEvent+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityEvent+CoreDataClass.swift"; sourceTree = "<group>"; };
+		984ACE7F2880D8F800F6C763 /* ActivityEvent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityEvent+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,8 +129,8 @@
 		984ACE6E2873773C00F6C763 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				984ACE7E2880D8F800F6C763 /* TimeEvent+CoreDataClass.swift */,
-				984ACE7F2880D8F800F6C763 /* TimeEvent+CoreDataProperties.swift */,
+				984ACE7E2880D8F800F6C763 /* ActivityEvent+CoreDataClass.swift */,
+				984ACE7F2880D8F800F6C763 /* ActivityEvent+CoreDataProperties.swift */,
 				984ACE662873771F00F6C763 /* Minute+CoreDataClass.swift */,
 				984ACE672873771F00F6C763 /* Minute+CoreDataProperties.swift */,
 				984ACE682873771F00F6C763 /* Activity+CoreDataClass.swift */,
@@ -241,7 +241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				984ACE802880D8F800F6C763 /* TimeEvent+CoreDataClass.swift in Sources */,
+				984ACE802880D8F800F6C763 /* ActivityEvent+CoreDataClass.swift in Sources */,
 				984ACE50286E42E300F6C763 /* minuteman.xcdatamodeld in Sources */,
 				984ACE4A286E42E300F6C763 /* MainViewController.swift in Sources */,
 				984ACE6D2873771F00F6C763 /* Activity+CoreDataProperties.swift in Sources */,
@@ -254,7 +254,7 @@
 				984ACE782874DA1500F6C763 /* Extensions.swift in Sources */,
 				984ACE6A2873771F00F6C763 /* Minute+CoreDataClass.swift in Sources */,
 				984ACE48286E42E300F6C763 /* SceneDelegate.swift in Sources */,
-				984ACE812880D8F800F6C763 /* TimeEvent+CoreDataProperties.swift in Sources */,
+				984ACE812880D8F800F6C763 /* ActivityEvent+CoreDataProperties.swift in Sources */,
 				984ACE7128737CA900F6C763 /* AddActivityCollectionViewCell.swift in Sources */,
 				984ACE6B2873771F00F6C763 /* Minute+CoreDataProperties.swift in Sources */,
 			);

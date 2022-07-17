@@ -23,6 +23,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var activities = [Activity]()
     
+    var currentActivity: Activity?
+    
+    var activityEvents = [ActivityEvent]()
+    
+    var currentActivityEvent: ActivityEvent?
+    
     var selectedDayTimestamps: [Int] = [Int](repeating: 0, count: 1440)
     
     var timer = Timer()
@@ -38,7 +44,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func updateCurrentMinute() {
         let today = Date()
         let seconds = (Calendar.current.component(.second, from: today))
-
+        
         if (seconds == 0) {
             self.currentTimestamp = Date().timeIntervalSince1970
             self.minutesCollectionView.reloadData()
@@ -56,7 +62,7 @@ extension MainViewController {
     func mapTimestampsToCurrentDay() {
         let minutes = 0...1439
         var timestamps: [Int] = []
-
+        
         for number in minutes {
             timestamps.append(Int(self.dayStart.timeIntervalSince1970) + number * 60)
         }
@@ -78,15 +84,65 @@ extension MainViewController {
     }
     
     func loadSavedData() {
-        let request = Activity.createFetchRequest()
-
+        let activityRequest = Activity.createFetchRequest()
+        
         do {
-            activities = try container.viewContext.fetch(request)
+            activities = try container.viewContext.fetch(activityRequest)
             print("Got \(activities.count) activities")
-            self.activitiesCollectionView.reloadData()
         } catch {
             print("Fetch failed")
         }
+        
+        let activityEventRequest = ActivityEvent.createFetchRequest()
+        
+        do {
+            activityEvents = try container.viewContext.fetch(activityEventRequest)
+            if let lastEvent = activityEvents.last {
+                if lastEvent.end == nil {
+                    if let activity = activities.first(where: { $0.id == lastEvent.activityId }) {
+                        currentActivityEvent = lastEvent
+                        currentActivity = activity
+                        minutesCollectionView.reloadData()
+                        activitiesCollectionView.reloadData()
+                    }
+                }
+            }
+            print("Got \(activityEvents.count) activity events")
+        } catch {
+            print("Fetch failed")
+        }
+    }
+    
+    func createActivityEvent(activityId: UUID) {
+        let activityEvent = ActivityEvent(context: container.viewContext)
+        activityEvent.id = UUID()
+        activityEvent.activityId = activityId
+        activityEvent.start = Date()
+        currentActivityEvent = activityEvent
+        saveContext()
+    }
+    
+    func completeActivityEvent(activityEventId: UUID) {
+        let fetchRequest = ActivityEvent.fetchRequest()
+        
+        fetchRequest.predicate = NSPredicate(
+            format: "id = %@", activityEventId as CVarArg
+        )
+        
+        do {
+            let request = ActivityEvent.createFetchRequest()
+            let activityEvent = try container.viewContext.fetch(request).first
+            if let event = activityEvent {
+                event.end = Date()
+            }
+            saveContext()
+            loadSavedData()
+            currentActivityEvent = nil
+            currentActivity = nil
+        } catch {
+            print("An error occurred while saving: \(error)")
+        }
+        
     }
 }
 
@@ -97,7 +153,7 @@ extension MainViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+        
         if (collectionView === self.minutesCollectionView) {
             return 1440
         }
@@ -110,32 +166,35 @@ extension MainViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if (collectionView === self.minutesCollectionView) {
+        if collectionView === self.minutesCollectionView {
             let cell = self.minutesCollectionView.dequeueReusableCell(withReuseIdentifier: "minuteCollectionViewCell", for: indexPath) as! MinuteCollectionViewCell
             
             if (indexPath.row == 1439 && Int(self.currentTimestamp) >= self.selectedDayTimestamps[indexPath.row]) {
                 cell.dotView.backgroundColor = .red
             } else {
-                cell.dotView.backgroundColor = .gray
+                cell.dotView.backgroundColor = .systemGray6
             }
-
-            if (Int(self.currentTimestamp) >= self.selectedDayTimestamps[indexPath.row] && Int(self.currentTimestamp) < self.selectedDayTimestamps[indexPath.row + 1]) {
-                
-                cell.dotView.backgroundColor = .red
+            
+            if Int(self.currentTimestamp) >= self.selectedDayTimestamps[indexPath.row] && Int(self.currentTimestamp) < self.selectedDayTimestamps[indexPath.row + 1] {
+                if  let colour = self.currentActivity?.colour {
+                    cell.dotView.backgroundColor = UIColor.color(data: colour)
+                } else {
+                    cell.dotView.backgroundColor = .red
+                }
             } else {
-                cell.dotView.backgroundColor = .gray
+                cell.dotView.backgroundColor = .systemGray6
             }
-
+            
             cell.setNeedsLayout()
             return cell
         }
-
-        if (indexPath.item == activities.count) {
+        
+        if indexPath.item == activities.count {
             let cell = self.activitiesCollectionView.dequeueReusableCell(withReuseIdentifier: "addActivityCollectionViewCell", for: indexPath) as! AddActivityCollectionViewCell
             cell.addActivityAction = {
                 self.performSegue(withIdentifier: "addActivity", sender: self)
             }
-                        
+            
             return cell
         }
         
@@ -144,28 +203,60 @@ extension MainViewController {
         activityCell.activityEmojiImage.image = activity.emoji.image()
         activityCell.backgroundColor = UIColor.color(data: activity.colour)
 
+        if let _currentActivity = self.currentActivity {
+            if activity.id == _currentActivity.id {
+                activityCell.backgroundColor = .red
+            }
+        }
         return activityCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (collectionView == self.activitiesCollectionView) {
+            let activity = activities[indexPath.row]
+            if let _currentActivity = currentActivity {
+                if let eventId = currentActivityEvent?.id {
+                    completeActivityEvent(activityEventId: eventId)
+
+                    if _currentActivity.id == activity.id {
+                        currentActivity = nil
+                        currentActivityEvent = nil
+                    } else {
+                        currentActivity = activity
+                        createActivityEvent(activityId: activity.id)
+                    }
+                }
+                
+                
+            } else {
+                currentActivity = activity
+                createActivityEvent(activityId: activity.id)
+            }
+            
+            minutesCollectionView.reloadData()
+            activitiesCollectionView.reloadData()
+        }
     }
 }
 
 // viewDidLoad
 extension MainViewController {
     func loadCollectionViews() {
-        self.minutesCollectionView.delegate = self
-        self.minutesCollectionView.dataSource = self
-        self.minutesCollectionView.register(UINib(nibName: "MinuteCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "minuteCollectionViewCell")
+        minutesCollectionView.delegate = self
+        minutesCollectionView.dataSource = self
+        minutesCollectionView.register(UINib(nibName: "MinuteCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "minuteCollectionViewCell")
         
         self.activitiesCollectionView.delegate = self
         self.activitiesCollectionView.dataSource = self
         self.activitiesCollectionView.register(UINib(nibName: "ActivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "activityCollectionViewCell")
-
+        
         self.activitiesCollectionView.register(UINib(nibName: "AddActivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "addActivityCollectionViewCell")
         
     }
     
     func loadCoreData() {
         container = NSPersistentContainer(name: "minuteman")
-
+        
         container.loadPersistentStores { storeDescription, error in
             if let error = error {
                 print("Unresolved error \(error)")
@@ -179,11 +270,11 @@ extension MainViewController {
         self.loadCollectionViews()
         self.loadCoreData()
         self.loadSavedData()
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.onActivitiesUpdate), name: Notification.Name("activitiesUpdate"), object: nil)
         
         self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
             self.updateCurrentMinute()
-            })
+        })
     }
 }
